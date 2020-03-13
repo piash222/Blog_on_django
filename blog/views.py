@@ -6,18 +6,12 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 # Create your views here.
 
-def home(request):
-    context = {
-        'posts': Post.objects.all()
-    }
-    return render(request, 'blog/home.html', context)
-
-
 class PostListView(ListView):
     model = Post
     template_name = 'blog/home.html'  # default: <app_name>/<model_name>_<view_name>.html
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 5
 
 
 class PostDetailView(DetailView):
